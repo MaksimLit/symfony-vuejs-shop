@@ -44,6 +44,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $fullName;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private ?string $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $address;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $zipcode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private ?bool $isDeleted;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -101,6 +126,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     *
+     * @return self
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -164,6 +194,106 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string|null $fullName
+     *
+     * @return self
+     */
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string|null $phone
+     *
+     * @return self
+     */
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string|null $address
+     *
+     * @return self
+     */
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getZipcode(): ?int
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param int|null $zipcode
+     *
+     * @return self
+     */
+    public function setZipcode(?int $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    /**
+     * @param bool|null $isDeleted
+     *
+     * @return self
+     */
+    public function setIsDeleted(?bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }
