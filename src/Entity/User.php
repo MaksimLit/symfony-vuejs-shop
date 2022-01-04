@@ -69,6 +69,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $isDeleted;
 
     /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->isDeleted = false;
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
