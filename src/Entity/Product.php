@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -20,43 +23,55 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
      */
-    private $price;
+    private ?string $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantity;
+    private ?int $quantity;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date_immutable")
      */
-    private $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished;
+    private bool $isPublished;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isDeleted;
+    private bool $isDeleted;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     */
+    private Collection $productImages;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private ?string $slug;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->isPublished = false;
-        $this->isDeleted = false;
+        $this->createdAt     = new \DateTimeImmutable();
+        $this->isPublished   = false;
+        $this->isDeleted     = false;
+        $this->productImages = new ArrayCollection();
     }
 
     /**
@@ -128,18 +143,19 @@ class Product
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return \DateTimeImmutable
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTimeInterface $createdAt
+     * @param \DateTimeImmutable $createdAt
+     *
      * @return self
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -202,6 +218,58 @@ class Product
     public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductImage[]
+     */
+    public function getProductImages(): Collection
+    {
+        return $this->productImages;
+    }
+
+    /**
+     * @param ProductImage $productImage
+     *
+     * @return self
+     */
+    public function addProductImage(ProductImage $productImage): self
+    {
+        if (!$this->productImages->contains($productImage)) {
+            $this->productImages[] = $productImage;
+            $productImage->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ProductImage $productImage
+     *
+     * @return self
+     */
+    public function removeProductImage(ProductImage $productImage): self
+    {
+        if ($this->productImages->removeElement($productImage)) {
+            // set the owning side to null (unless already changed)
+            if ($productImage->getProduct() === $this) {
+                $productImage->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
