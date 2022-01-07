@@ -64,9 +64,15 @@ class EditProductModel
      */
     public $isDeleted;
 
+    /**
+     * @param Product|null $product
+     *
+     * @return self
+     */
     public static function makeFromProduct(?Product $product): self
     {
         $model = new self();
+
         if (!$product) {
             return $model;
         }

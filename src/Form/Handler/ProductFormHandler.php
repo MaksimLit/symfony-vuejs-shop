@@ -3,6 +3,7 @@
 namespace App\Form\Handler;
 
 use App\Entity\Product;
+use App\Form\DTO\EditProductModel;
 use App\Service\File\FileSaver;
 use App\Service\Manager\ProductManager;
 use Symfony\Component\Form\FormInterface;
@@ -29,13 +30,26 @@ class ProductFormHandler
     }
 
     /**
-     * @param Product       $product
-     * @param FormInterface $form
+     * @param EditProductModel $editProductModel
+     * @param FormInterface    $form
      *
      * @return Product
      */
-    public function processEditForm(Product $product, FormInterface $form): Product
+    public function processEditForm(EditProductModel $editProductModel, FormInterface $form): Product
     {
+        $product = new Product();
+
+        if ($editProductModel->id) {
+            $product = $this->productManager->find($editProductModel->id);
+        }
+
+        $product->setTitle($editProductModel->title);
+        $product->setPrice((string) $editProductModel->price);
+        $product->setQuantity($editProductModel->quantity);
+        $product->setDescription($editProductModel->description);
+        $product->setIsPublished($editProductModel->isPublished);
+        $product->setIsDeleted($editProductModel->isDeleted);
+
         $this->productManager->persistAndFlush($product);
 
         $newImageFile = $form->get('newImage')->getData();

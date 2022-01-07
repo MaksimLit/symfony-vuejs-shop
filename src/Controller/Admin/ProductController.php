@@ -58,12 +58,12 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product = $productFormHandler->processEditForm($product, $form);
+            $product = $productFormHandler->processEditForm($editProductModel, $form);
 
             return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
         }
 
-        $images = $product->getProductImages()
+        $images = $product
             ? $product->getProductImages()->getValues()
             : [];
 
