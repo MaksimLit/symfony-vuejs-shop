@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
     /**
      * @var EmailVerifier
      */
-    private EmailVerifier $emailVerifier;
+    private $emailVerifier;
 
     /**
      * RegistrationController constructor.

@@ -24,7 +24,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'main_login';
 
-    private UrlGeneratorInterface $urlGenerator;
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
 
     /**
      * LoginFormAuthenticator constructor.

@@ -23,9 +23,20 @@ class AddUserCommand extends Command
     protected static $defaultName        = 'app:add-user';
     protected static $defaultDescription = 'Create user';
 
-    private EntityManagerInterface $entityManager;
-    private UserPasswordHasherInterface $hasher;
-    private UserRepository $userRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var UserPasswordHasherInterface
+     */
+    private $hasher;
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * AddUserCommand constructor.
@@ -33,6 +44,7 @@ class AddUserCommand extends Command
     public function __construct(string $name = null, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher, UserRepository $userRepository)
     {
         parent::__construct($name);
+
         $this->entityManager  = $entityManager;
         $this->hasher         = $hasher;
         $this->userRepository = $userRepository;

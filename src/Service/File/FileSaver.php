@@ -15,17 +15,17 @@ class FileSaver
     /**
      * @var SluggerInterface
      */
-    private SluggerInterface $slugger;
+    private $slugger;
 
     /**
      * @var string
      */
-    private string $uploadsTempDir;
+    private $uploadsTempDir;
 
     /**
      * @var FilesystemWorker
      */
-    private FilesystemWorker $filesystemWorker;
+    private $filesystemWorker;
 
     /**
      * FileSaver constructor.

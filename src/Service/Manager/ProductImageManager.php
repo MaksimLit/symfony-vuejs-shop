@@ -16,17 +16,17 @@ class ProductImageManager extends AbstractBaseManager
     /**
      * @var FilesystemWorker
      */
-    private FilesystemWorker $filesystemWorker;
+    private $filesystemWorker;
 
     /**
      * @var string
      */
-    private string $uploadsTempDir;
+    private $uploadsTempDir;
 
     /**
      * @var ImageResizer
      */
-    private ImageResizer $imageResizer;
+    private $imageResizer;
 
     /**
      * ProductImageManager constructor.

@@ -25,47 +25,47 @@ class Product
     /**
      * @ORM\Column(type="uuid")
      */
-    private UuidV4 $uuid;
+    private $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $title;
+    private $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
      */
-    private ?string $price;
+    private $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $quantity;
+    private $quantity;
 
     /**
      * @ORM\Column(type="date_immutable")
      */
-    private \DateTimeImmutable $createdAt;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description;
+    private $description;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isPublished;
+    private $isPublished;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isDeleted;
+    private $isDeleted;
 
     /**
      * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", cascade={"persist"}, orphanRemoval=true)
      */
-    private Collection $productImages;
+    private $productImages;
 
     /**
      * @Gedmo\Slug(fields={"title"})

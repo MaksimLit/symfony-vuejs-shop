@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectRepository;
  */
 abstract class AbstractBaseManager
 {
-    protected EntityManagerInterface $entityManager;
+    protected $entityManager;
 
     /**
      * AbstractBaseManager constructor.

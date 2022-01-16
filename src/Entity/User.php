@@ -25,48 +25,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private ?string $email;
+    private $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private string $password;
+    private $password;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isVerified = false;
+    private $isVerified = false;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $fullName;
+    private $fullName;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private ?string $phone;
+    private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $address;
+    private $address;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $zipcode;
+    private $zipcode;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $isDeleted;
+    private $isDeleted;
 
     /**
      * User constructor.

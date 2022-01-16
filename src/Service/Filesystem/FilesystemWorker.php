@@ -12,7 +12,7 @@ class FilesystemWorker
     /**
      * @var Filesystem
      */
-    private Filesystem $filesystem;
+    private $filesystem;
 
     /**
      * FilesystemWorker constructor.

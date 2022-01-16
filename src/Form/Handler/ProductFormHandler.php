@@ -16,12 +16,12 @@ class ProductFormHandler
     /**
      * @var FileSaver
      */
-    private FileSaver $fileSaver;
+    private $fileSaver;
 
     /**
      * @var ProductManager
      */
-    private ProductManager $productManager;
+    private $productManager;
 
     public function __construct(ProductManager $productManager, FileSaver $fileSaver)
     {

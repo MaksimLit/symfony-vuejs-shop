@@ -13,7 +13,7 @@ class ImageResizer
     /**
      * @var Imagine
      */
-    private Imagine $imagine;
+    private $imagine;
 
     /**
      * ImageResizer constructor.

@@ -14,12 +14,12 @@ class ProductManager extends AbstractBaseManager
     /**
      * @var string
      */
-    private string $productImagesDir;
+    private $productImagesDir;
 
     /**
      * @var ProductImageManager
      */
-    private ProductImageManager $productImageManager;
+    private $productImageManager;
 
     /**
      * ProductManager constructor.
